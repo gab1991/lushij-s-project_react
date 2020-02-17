@@ -1,0 +1,154 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Raleway", sans-serif;
+  background: lightgrey;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+}
+
+header {
+  height: 10vh;
+}
+
+h1 {
+  padding: 10px;
+}
+
+span:focus {
+  outline: none;
+}
+
+td,
+th {
+  border: 1px solid black;
+  padding: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+th {
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.content-table {
+  table-layout: fixed;
+  overflow: hidden;
+  width: 96%;
+  margin-top: 2%;
+  margin-left: 2%;
+  margin-right: 2%;
+  border-collapse: collapse;
+}
+
+.content-table thead tr {
+  background-color: rgba(16, 49, 16, 0.63);
+  font-weight: bold;
+  height: 40px;
+}
+
+.content-table tbody tr {
+  font-size: 0.9em;
+}
+
+.content-table tbody tr:nth-of-type(even) {
+  background-color: rgba(85, 131, 84, 0.2);
+}
+
+table>thead>tr>th:nth-child(1) {
+  width: 4%;
+}
+
+table>thead>tr>th:nth-child(2),
+table>thead>tr>th:nth-child(8) {
+  width: 5%;
+}
+
+table>thead>tr>th:nth-child(3),
+table>thead>tr>th:nth-child(5),
+table>thead>tr>th:nth-child(10) {
+  width: 7%;
+}
+
+table>thead>tr>th:nth-child(6) {
+  width: 8%;
+}
+
+table>thead>tr>th:nth-child(7),
+table>thead>tr>th:nth-child(9) {
+  width: 8%;
+}
+
+table>thead>tr>th:nth-child(11) {
+  width: 12%;
+}
+
+td.focus {
+  white-space: normal;
+  border: 3px solid rgb(76, 143, 165);
+}
+
+td.text,
+.text:focus {
+  text-align: left;
+}
+
+.pagination {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination button {
+  padding: 5px;
+  border: 2px solid rgba(16, 49, 16, 0.63);
+  border-radius: 3px;
+  font-family: inherit;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  background-color: rgb(186, 226, 186);
+  cursor: pointer;
+  transition: all ease-in 0.1s;
+}
+
+button.active {
+  transform: scale(1.1);
+  background-color: rgb(155, 201, 155);
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+button:focus {
+  outline: none;
+}
+
+button.saveBtn {
+  position: absolute;
+  z-index: 10;
+  padding: 5px;
+  border: 2px solid rgba(16, 49, 16, 0.63);
+  border-radius: 3px;
+  font-family: inherit;
+  text-align: center;
+  margin: 5px;
+  background-color: rgb(186, 226, 186);
+  cursor: pointer;
+  transition: all ease-in 0.1s;
+}
