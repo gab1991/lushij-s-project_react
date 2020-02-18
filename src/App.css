@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-body {
+.App {
   font-family: "Raleway", sans-serif;
   background: lightgrey;
   background-size: cover;
@@ -91,7 +91,7 @@ table>thead>tr>th:nth-child(11) {
   width: 12%;
 }
 
-td.focus {
+td:focus {
   white-space: normal;
   border: 3px solid rgb(76, 143, 165);
 }

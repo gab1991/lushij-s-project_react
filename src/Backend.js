@@ -15,7 +15,6 @@ const Backend = {
       fetch(url, {
         method: 'POST',
         headers: {
-          'Content-type': 'application/json',
           'Content-type': 'application/x-www-form-urlencoded'
         },
         body: JSON.stringify(data)
