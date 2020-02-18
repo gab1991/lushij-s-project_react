@@ -13,19 +13,5 @@ export default function Tr(props) {
     let tdData = Object.entries(tds);
     content = tdData.map(td => <Td key={uuid()} td={td} />);
   }
-  return (
-    <tr
-      key={uuid()}
-      // onFocus={e => {
-      //   console.log('here', e.target);
-      //   e.target.parentElement.classList.add('focus');
-      // }}
-      // onBlur={e => {
-      //   console.log('here', e.target);
-      //   e.target.parentElement.classList.remove('focus');
-      // }}
-    >
-      {content}
-    </tr>
-  );
+  return <tr key={uuid()}>{content}</tr>;
 }
