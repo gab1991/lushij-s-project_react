@@ -3,7 +3,7 @@ import SaveButton from './SaveButton';
 import Text from './Text';
 import uuid from 'react-uuid';
 
-export default function Td(props) {
+export default React.memo(function Td(props) {
   const [displaySaveButton, setDisplaySaveButton] = useState(false);
   const [dimensions, setDimensions] = useState();
   const [dataSaved, setDataSaved] = useState(null); // question here
@@ -33,4 +33,4 @@ export default function Td(props) {
       />
     </td>
   );
-}
+});
