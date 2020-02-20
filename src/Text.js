@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import SaveButton from './SaveButton.js';
 
-export default function Text({ data }) {
+export default function Text({ data, fullTr }) {
   const editableClasses = [
     'text',
     'type',
@@ -13,24 +13,14 @@ export default function Text({ data }) {
 
   const [displaySaveButton, setDisplaySaveButton] = useState(false);
   const [dimensions, setDimensions] = useState();
-  const [dataSaved, setDataSaved] = useState(false); // question here
   const [currentTxt, setCurrentTxt] = useState(data[1]);
 
   const saveBtnRef = useRef();
-
-  useEffect(() => {
-    console.log(dataSaved);
-  }, [dataSaved]);
-
-  useEffect(() => {
-    console.log(currentTxt);
-  }, [currentTxt]);
 
   const hasEditableClass = editableClasses.includes(data[0]);
 
   const showSaveButton = e => {
     let dimensions = e.target.parentNode.getBoundingClientRect();
-    setDataSaved(false);
     setDimensions(dimensions);
     setDisplaySaveButton(true);
   };
@@ -41,10 +31,8 @@ export default function Text({ data }) {
   };
 
   const saveTxt = e => {
-    setDataSaved(true);
     setCurrentTxt(e.target.previousSibling.textContent);
   };
-
   return (
     <>
       {hasEditableClass && (
@@ -72,7 +60,7 @@ export default function Text({ data }) {
         ref={saveBtnRef}
         dimensions={dimensions}
         saveTxt={saveTxt}
-        fullTr={data}
+        fullTr={fullTr}
         fieldName={data[0]}
         text={currentTxt}
       />

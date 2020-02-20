@@ -7,12 +7,9 @@ export default forwardRef(function SaveButton(props, ref) {
   if (isDisplayed) {
     const top = `${props.dimensions.top}px`;
     const left = `${props.dimensions.left + props.dimensions.width}px`;
-
     const saveTxt = props.saveTxt;
-
     const id = props.fullTr.id;
     const fieldName = props.fieldName;
-
     return (
       <button
         ref={ref}
@@ -22,14 +19,13 @@ export default forwardRef(function SaveButton(props, ref) {
           saveTxt(e);
 
           const sendObj = {
-            userId: id,
-            [fieldName]: props.text
+            id: id,
+            [fieldName]: e.target.previousSibling.textContent
           };
 
-          //need a better way
           (async function() {
             const sending = await Backend.postData(sendObj);
-            console.log(sending);
+            console.log(sendObj, sending);
           })();
         }}
       >

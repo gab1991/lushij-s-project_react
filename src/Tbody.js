@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Backend from './Backend.js';
 import Tr from './Tr.js';
+import Pagination from './Pagination';
 
 export default function Tbody() {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentData, setCurrentData] = useState([]);
+  const [totalCount, setTotalCount] = useState();
   const [rows, setRows] = useState(0);
 
   useEffect(() => {
@@ -23,6 +25,10 @@ export default function Tbody() {
       }
     }
   }, [currentData]);
+
+  useEffect(() => {
+    getData(currentPage, rows);
+  }, [currentPage]);
 
   const countRowsToFetch = async () => {
     const theadHeight = 40;
@@ -44,16 +50,25 @@ export default function Tbody() {
     const data = await Backend.loadData(offset, pageSize);
     if (data.data) {
       setCurrentData(data.data);
+      setTotalCount(data.totalCount);
     } else {
       console.warn('data has not been fetched from the remote server');
     }
   };
 
   return (
-    <tbody>
-      {currentData.map(elm => (
-        <Tr key={elm.id} data={elm} />
-      ))}
-    </tbody>
+    <>
+      <tbody>
+        {currentData.map(elm => (
+          <Tr key={elm.id} data={elm} />
+        ))}
+      </tbody>
+      <Pagination
+        totalCount={totalCount}
+        rowsPerPage={rows}
+        currentPage={currentPage}
+        changeCurrentPage={setCurrentPage}
+      />
+    </>
   );
 }

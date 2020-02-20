@@ -5,7 +5,7 @@ import uuid from 'react-uuid';
 export default function Td(props) {
   return (
     <td key={uuid()} className={props.td[0]}>
-      <Text data={props.td} />
+      <Text data={props.td} fullTr={props.fullTr} />
     </td>
   );
 }
