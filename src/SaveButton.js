@@ -1,4 +1,5 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState, useEffect } from 'react';
+import Backend from './Backend.js';
 
 export default forwardRef(function SaveButton(props, ref) {
   const isDisplayed = props.displaySaveButton;
@@ -6,23 +7,30 @@ export default forwardRef(function SaveButton(props, ref) {
   if (isDisplayed) {
     const top = `${props.dimensions.top}px`;
     const left = `${props.dimensions.left + props.dimensions.width}px`;
-    const savedata = props.setdatasaved;
+
+    const saveTxt = props.saveTxt;
+
     const id = props.fullTr.id;
     const fieldName = props.fieldName;
-    console.log(fieldName);
 
     return (
       <button
         ref={ref}
         className="saveBtn"
         style={{ top: top, left: left }}
-        onMouseDown={() => {
-          savedata('true');
+        onMouseDown={e => {
+          saveTxt(e);
 
           const sendObj = {
-            id: id
-            // [fieldName]: txtCont
+            userId: id,
+            [fieldName]: props.text
           };
+
+          //need a better way
+          (async function() {
+            const sending = await Backend.postData(sendObj);
+            console.log(sending);
+          })();
         }}
       >
         Save Changes
