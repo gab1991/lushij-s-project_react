@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import Text from './Text';
 import uuid from 'react-uuid';
 

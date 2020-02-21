@@ -15,6 +15,7 @@ export default function Tbody() {
 
   useEffect(() => {
     if (rows) getData(currentPage, rows);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rows]);
 
   useEffect(() => {
@@ -28,6 +29,7 @@ export default function Tbody() {
 
   useEffect(() => {
     getData(currentPage, rows);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
   const countRowsToFetch = async () => {

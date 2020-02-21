@@ -1,7 +1,7 @@
-import React, { forwardRef, useState, useEffect } from 'react';
+import React from 'react';
 import Backend from './Backend.js';
 
-export default forwardRef(function SaveButton(props, ref) {
+export default function SaveButton(props) {
   const isDisplayed = props.displaySaveButton;
 
   if (isDisplayed) {
@@ -12,7 +12,6 @@ export default forwardRef(function SaveButton(props, ref) {
     const fieldName = props.fieldName;
     return (
       <button
-        ref={ref}
         className="saveBtn"
         style={{ top: top, left: left }}
         onMouseDown={e => {
@@ -32,5 +31,7 @@ export default forwardRef(function SaveButton(props, ref) {
         Save Changes
       </button>
     );
+  } else {
+    return null;
   }
-});
+}

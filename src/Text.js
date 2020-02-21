@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import SaveButton from './SaveButton.js';
 
 export default function Text({ data, fullTr }) {
@@ -14,8 +14,6 @@ export default function Text({ data, fullTr }) {
   const [displaySaveButton, setDisplaySaveButton] = useState(false);
   const [dimensions, setDimensions] = useState();
   const [currentTxt, setCurrentTxt] = useState(data[1]);
-
-  const saveBtnRef = useRef();
 
   const hasEditableClass = editableClasses.includes(data[0]);
 
@@ -57,12 +55,10 @@ export default function Text({ data, fullTr }) {
       {!hasEditableClass && <span>{data[1]}</span>}
       <SaveButton
         displaySaveButton={displaySaveButton}
-        ref={saveBtnRef}
         dimensions={dimensions}
         saveTxt={saveTxt}
         fullTr={fullTr}
         fieldName={data[0]}
-        text={currentTxt}
       />
     </>
   );
