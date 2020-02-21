@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Backend from './Backend.js';
 import Tr from './Tr.js';
 import Pagination from './Pagination';
 
-export default function Tbody() {
+export default function Tbody({ theadRef }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentData, setCurrentData] = useState([]);
   const [totalCount, setTotalCount] = useState();
   const [rows, setRows] = useState(0);
-
+  const tbody = useRef();
   useEffect(() => {
     countRowsToFetch();
   }, []);
@@ -20,8 +20,7 @@ export default function Tbody() {
 
   useEffect(() => {
     if (currentData.length > 0) {
-      const body = document.querySelector('tbody');
-      if (body.children.length !== currentData.length) {
+      if (tbody.current.children.length !== currentData.length) {
         console.warn('not all the rows are displayed');
       }
     }
@@ -35,8 +34,8 @@ export default function Tbody() {
   const countRowsToFetch = async () => {
     const theadHeight = 40;
     const rowHeight = 28;
-    const thead = document.querySelector('thead');
-    const tHeadDimensions = thead.getBoundingClientRect(); // Getting the size of the table
+    const thead = theadRef.current;
+    const tHeadDimensions = thead.getBoundingClientRect();
     const tOffsetAndHeight = tHeadDimensions.y;
     const freeSpaceBottom = 2 * rowHeight;
     const rowsToUpload = Math.floor(
@@ -60,7 +59,7 @@ export default function Tbody() {
 
   return (
     <>
-      <tbody>
+      <tbody ref={tbody}>
         {currentData.map(elm => (
           <Tr key={elm.id} data={elm} />
         ))}

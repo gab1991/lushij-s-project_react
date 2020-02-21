@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
 import Backend from './Backend.js';
 import Tr from './Tr.js';
 
-export default function Thead() {
+export default forwardRef(function Thead(props, ref) {
   const [headers, setHeaders] = useState([]);
   useEffect(() => {
     getHeaders();
@@ -22,8 +22,8 @@ export default function Thead() {
   }
 
   return (
-    <thead>
+    <thead ref={ref}>
       <Tr headers={headers} />
     </thead>
   );
-}
+});
