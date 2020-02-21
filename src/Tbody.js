@@ -9,6 +9,7 @@ export default function Tbody({ theadRef }) {
   const [totalCount, setTotalCount] = useState();
   const [rows, setRows] = useState(0);
   const tbody = useRef();
+
   useEffect(() => {
     countRowsToFetch();
   }, []);
