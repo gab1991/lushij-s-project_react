@@ -4,7 +4,6 @@ import SaveButton from './SaveButton.js';
 export default function Text({ data, fullTr }) {
   const editableClasses = [
     'text',
-    'type',
     'publishDate',
     'publishHour',
     'isPaid',
