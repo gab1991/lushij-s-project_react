@@ -47,7 +47,7 @@ export default function Text({ data, fullTr, tdRef }) {
 
     const sendObj = {
       id: fullTr.id,
-      [data[0]]: `${year}-${month}-${day}`
+      [data[0]]: `${day}.${month}.${year}`
     };
 
     console.log(sendObj);
