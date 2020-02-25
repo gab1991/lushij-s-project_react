@@ -13,5 +13,5 @@ export default function Tr(props) {
     let tdData = Object.entries(tds);
     content = tdData.map(td => <Td key={uuid()} td={td} fullTr={tds} />);
   }
-  return <tr key={uuid()}>{content}</tr>;
+  return <tr>{content}</tr>;
 }
