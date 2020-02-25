@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import SaveButton from './SaveButton.js';
 import DatePicker from 'react-datepicker';
 import Backend from './Backend.js';
@@ -50,7 +50,6 @@ export default function Text({ data, fullTr, tdRef }) {
       [data[0]]: `${day}.${month}.${year}`
     };
 
-    console.log(sendObj);
     (async function() {
       const sending = await Backend.postData(sendObj);
       console.log(sendObj, sending);

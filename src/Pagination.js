@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import uuid from 'react-uuid';
+import React from 'react';
 
 export default function Pagination({
   rowsPerPage,
@@ -8,11 +7,10 @@ export default function Pagination({
   changeCurrentPage
 }) {
   let pageCount = Math.ceil(totalCount / rowsPerPage);
-  let activeBtn = useRef();
   let buttons = [];
 
   const buttonClick = e => {
-    const lastPage = buttons.length - 2;
+    const lastPage = buttons.length;
     const leftArrow = e.target.getAttribute('data-page') === '<<';
     const rightArrow = e.target.getAttribute('data-page') === '>>';
 
@@ -30,40 +28,31 @@ export default function Pagination({
   };
 
   for (let i = 1; i <= pageCount; i++) {
-    if (i === 1 && pageCount > 1) {
-      buttons.push(
-        <button key={uuid()} data-page={'<<'} onClick={buttonClick}>
-          {'<<'}
-        </button>
-      );
-    }
-    if (currentPage === i) {
-      buttons.push(
-        <button
-          ref={activeBtn}
-          className="active"
-          key={uuid()}
-          data-page={i}
-          onClick={buttonClick}
-        >
-          {i}
-        </button>
-      );
-    } else {
-      buttons.push(
-        <button key={uuid()} data-page={i} onClick={buttonClick}>
-          {i}
-        </button>
-      );
-    }
-    if (i === pageCount && pageCount > 1) {
-      buttons.push(
-        <button key={uuid()} data-page={'>>'} onClick={buttonClick}>
-          {'>>'}
-        </button>
-      );
-    }
+    buttons.push(
+      <button
+        key={i}
+        className={currentPage === i ? 'active' : null}
+        data-page={i}
+        onClick={buttonClick}
+      >
+        {i}
+      </button>
+    );
   }
 
-  return <div className="pagination">{buttons}</div>;
+  return (
+    <div className="pagination">
+      {pageCount > 1 && (
+        <button data-page={'<<'} onClick={buttonClick}>
+          {'<<'}
+        </button>
+      )}
+      {buttons}
+      {pageCount > 1 && (
+        <button data-page={'>>'} onClick={buttonClick}>
+          {'>>'}
+        </button>
+      )}
+    </div>
+  );
 }
