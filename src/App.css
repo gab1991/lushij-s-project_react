@@ -164,3 +164,7 @@ input {
   padding: none;
   width: 100%;
 }
+
+.react-datepicker {
+  font-family: inherit;
+}

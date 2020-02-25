@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import SaveButton from './SaveButton.js';
 import DatePicker from 'react-datepicker';
+import Backend from './Backend.js';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default function Text({ data, fullTr }) {
+export default function Text({ data, fullTr, tdRef }) {
   const editableClasses = ['text', 'publishHour', 'isPaid', 'isDeleted'];
   const dateClasses = ['publishDate'];
 
@@ -18,23 +19,13 @@ export default function Text({ data, fullTr }) {
   const isDate = dateClasses.includes(data[0]);
 
   if (isDate && !publishDate) {
-    if (data[1]) {
-      const dateArr = data[1].split('-');
-      let year = Number(dateArr[0]);
-      let month = Number(dateArr[1]) - 1;
-      let day = Number(dateArr[2]);
-      setPublishDate(new Date(year, month, day));
-    }
+    if (data[1]) setPublishDate(new Date(data[1]));
   }
 
   const showSaveButton = e => {
-    let dimensions = e.target.parentNode.getBoundingClientRect();
+    let dimensions = tdRef.current.getBoundingClientRect();
     setDimensions(dimensions);
     setDisplaySaveButton(true);
-  };
-
-  const showDatePicker = e => {
-    console.log('showing picker');
   };
 
   const hideSaveButton = e => {
@@ -46,6 +37,26 @@ export default function Text({ data, fullTr }) {
     setCurrentTxt(e.target.previousSibling.textContent);
   };
 
+  const saveSelectedDate = date => {
+    setPublishDate(date);
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    if (month < 10) month = `0${month}`;
+    let day = date.getUTCDate();
+    if (day < 10) day = `0${day}`;
+
+    const sendObj = {
+      id: fullTr.id,
+      [data[0]]: `${year}-${month}-${day}`
+    };
+
+    console.log(sendObj);
+    (async function() {
+      const sending = await Backend.postData(sendObj);
+      console.log(sendObj, sending);
+    })();
+  };
+
   return (
     <>
       {hasEditableClass && (
@@ -54,22 +65,35 @@ export default function Text({ data, fullTr }) {
           contentEditable={true}
           suppressContentEditableWarning={true}
           onFocus={e => {
-            e.target.parentElement.classList.add('focus');
+            tdRef.current.classList.add('focus');
           }}
           onBlur={e => {
-            e.target.parentElement.classList.remove('focus');
+            tdRef.current.classList.remove('focus');
             hideSaveButton(e);
           }}
           onInput={e => {
             if (displaySaveButton) return;
             showSaveButton(e);
-            showDatePicker(e);
           }}
         >
           {currentTxt}
         </span>
       )}
-      {isDate && <DatePicker selected={publishDate} />}
+      {isDate && (
+        <DatePicker
+          selected={publishDate}
+          dateFormat="dd-MM-yyyy"
+          onChange={date => {
+            saveSelectedDate(date);
+          }}
+          onCalendarOpen={() => {
+            tdRef.current.classList.add('focus');
+          }}
+          onCalendarClose={() => {
+            tdRef.current.classList.remove('focus');
+          }}
+        />
+      )}
       {!hasEditableClass && !isDate && <span>{data[1]}</span>}
       <SaveButton
         displaySaveButton={displaySaveButton}
