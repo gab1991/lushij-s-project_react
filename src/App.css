@@ -5,7 +5,7 @@
 }
 
 .App {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   background: lightgrey;
   background-size: cover;
   width: 100%;
@@ -63,31 +63,31 @@ th {
   background-color: rgba(85, 131, 84, 0.2);
 }
 
-table>thead>tr>th:nth-child(1) {
+table > thead > tr > th:nth-child(1) {
   width: 4%;
 }
 
-table>thead>tr>th:nth-child(2),
-table>thead>tr>th:nth-child(8) {
+table > thead > tr > th:nth-child(2),
+table > thead > tr > th:nth-child(8) {
   width: 5%;
 }
 
-table>thead>tr>th:nth-child(3),
-table>thead>tr>th:nth-child(5),
-table>thead>tr>th:nth-child(10) {
+table > thead > tr > th:nth-child(3),
+table > thead > tr > th:nth-child(5),
+table > thead > tr > th:nth-child(10) {
   width: 7%;
 }
 
-table>thead>tr>th:nth-child(6) {
+table > thead > tr > th:nth-child(6) {
   width: 8%;
 }
 
-table>thead>tr>th:nth-child(7),
-table>thead>tr>th:nth-child(9) {
+table > thead > tr > th:nth-child(7),
+table > thead > tr > th:nth-child(9) {
   width: 8%;
 }
 
-table>thead>tr>th:nth-child(11) {
+table > thead > tr > th:nth-child(11) {
   width: 12%;
 }
 
@@ -150,4 +150,17 @@ button.saveBtn {
   background-color: rgb(186, 226, 186);
   cursor: pointer;
   transition: all ease-in 0.1s;
+}
+
+input {
+  border: none;
+  background-color: inherit;
+  font-family: inherit;
+  text-align: center;
+  outline: none;
+  display: inline;
+  font-family: inherit;
+  font-size: inherit;
+  padding: none;
+  width: 100%;
 }
